@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Conversor de coordenadas</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+
+	<div class="container mx-auto py-10">
+		<div class="max-w-lg mx-auto bg-white p-5 rounded-lg shadow-lg">
+			<h1 class="text-2xl text-center mb-5">Conversor de Coordenadas</h1>
+			<div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="input">Cole o código no campo abaixo:</label>
+				<textarea id="input" class="w-full p-2 border rounded-lg focus:outline-none focus:shadow-outline" rows="10"></textarea>
+			</div>
+			<div class="mb-4">
+				<button onclick="convert()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+					Converter
+				</button>
+			</div>
+			<div>
+				<label class="block text-gray-700 font-bold mb-2" for="output">Resultado:</label>
+				<textarea id="output" class="w-full p-2 border rounded-lg focus:outline-none focus:shadow-outline" rows="10" readonly></textarea>
+				<a id="downloadLink" style="display:none" download="PNEZD Coordenadas.txt" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+					Download
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function convert() {
+			const input = document.getElementById('input').value;
+			const lines = input.split('\n');
+			let output = '';
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i].trim().replace(/,/g, '.').replace(/\s+/g, ',');
+				output += line + '\n';
+			}
+			document.getElementById('output').value = output;
+
+			// Cria um link para download do arquivo
+			const downloadLink = document.getElementById('downloadLink');
+			const file = new Blob([output], {type: 'text/plain'});
+			downloadLink.href = URL.createObjectURL(file);
+			downloadLink.style.display = 'block';
+		}
+	</script>
+
+</body>
+</html>
