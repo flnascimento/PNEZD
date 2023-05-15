@@ -23,7 +23,7 @@
 			<div>
 				<label class="block text-gray-700 font-bold mb-2" for="output">Resultado:</label>
 				<textarea id="output" class="w-full p-2 border rounded-lg focus:outline-none focus:shadow-outline" rows="10" readonly></textarea>
-				<a id="downloadLink" style="display:none; download: PNEZD Coordenadas.txt; display: flex; justify-content: center" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">
+				<a id="downloadLink" style="display:none" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">
 					Download
 				</a>
 			</div>
@@ -46,6 +46,7 @@
 			const file = new Blob([output], {type: 'text/plain'});
 			downloadLink.href = URL.createObjectURL(file);
 			downloadLink.style.display = 'block';
+			downloadLink.setAttribute('download', 'PNEZD Coordenadas.txt');
 		}
 	</script>
 
